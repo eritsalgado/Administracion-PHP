@@ -22,6 +22,6 @@ try{
 }catch(PDOException $e){
 
     echo "<br>Ocurrio un error ->" . $e->getMessage();
-
+ 
 }
 ?>
