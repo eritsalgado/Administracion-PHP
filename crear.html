@@ -55,7 +55,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-8">
-                            <form>
+                            <form action="create.php" method="POST">
                                 <div class="form-group row">
                                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-10">
@@ -79,13 +79,13 @@
                                     <legend class="col-form-label col-sm-2 pt-0">Rango</legend>
                                     <div class="col-sm-10">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                        <input class="form-check-input" type="radio" name="rango" id="gridRadios1" value="2" checked>
                                         <label class="form-check-label" for="gridRadios1">
                                             Usuario
                                         </label>
                                         </div>
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                        <input class="form-check-input" type="radio" name="rango" id="gridRadios2" value="1">
                                         <label class="form-check-label" for="gridRadios2">
                                             Admin
                                         </label>
@@ -95,7 +95,7 @@
                                 </fieldset>
                                 <div class="form-group row">
                                     <div class="col">
-                                    <button type="submit" class="btn btn-success full-width">Registrar</button>
+                                    <input type="submit" class="btn btn-success full-width" value="Registrar">
                                     </div>
                                 </div>
                             </form>

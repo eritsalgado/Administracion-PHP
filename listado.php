@@ -1,3 +1,16 @@
+<?php 
+    include_once("conexion.php");
+    $consulta = $bd->prepare("SELECT * FROM usuarios");
+    $consulta->execute();
+    $array_resultados = $consulta->fetchAll();
+    // echo "<pre>";
+    // print_r ($array_resultado);
+    // echo "</pre>";
+    // echo $array_resultado[1]['nombre'];
+    // foreach ($array_resultados as $key => $resultado ) {
+    //     echo $resultado['nombre']."<br>";
+    // }
+?>
 <!DOCrole html>
 <html lang="es">
 <head>
@@ -79,13 +92,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                      foreach ($array_resultados as $key => $resultado ): ?>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Erit Salgado</td>
-                                    <td>erit@hotmail.com</td>
-                                    <td>Usuario</td>
+                                    <th scope="row"><?php echo $key+1;?></th>
+                                    <td><?php echo $resultado['nombre'];?></td>
+                                    <td><?php echo $resultado['correo'];?></td>
+                                    <td><?php echo $resultado['rango']=="1"? "Administrador":"Usuario"?></td>
                                     <td class="text-center">
-                                        <a href="editar.html" 
+                                        <a href="editar.php?id=<?php echo $resultado['id'];?>"
                                         role="button" 
                                         class="btn btn-success btn-sm" 
                                         data-toggle="tooltip" 
@@ -94,7 +109,7 @@
                                         data-html="true">
                                             <i class="fas fa-user-edit"></i>
                                         </a>
-                                        <a href="#" 
+                                        <a href="delete.php?id=<?php echo $resultado['id'];?>"
                                         role="button" 
                                         class="btn btn-danger btn-sm"  
                                         data-toggle="tooltip" 
@@ -114,76 +129,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jorge Aguirre</td>
-                                    <td>jorge@hotmail.com</td>
-                                    <td>Admin</td>
-                                    <td class="text-center">
-                                        <a href="editar.html" 
-                                        role="button" 
-                                        class="btn btn-success btn-sm" 
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Modificar datos de usuario" 
-                                        data-html="true">
-                                            <i class="fas fa-user-edit"></i>
-                                        </a>
-                                        <a href="#" 
-                                        role="button" 
-                                        class="btn btn-danger btn-sm"  
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Eliminar usuario" data-h
-                                        tml="true">
-                                            <i class="fas fa-user-times"></i>
-                                        </a>
-                                        <a href="#" 
-                                        role="button" 
-                                        class="btn btn-info btn-sm"  
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Enviar mail a usuario" 
-                                        data-html="true">
-                                            <i class="fas fa-envelope text-white"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Adad Torres</td>
-                                    <td>adad@hotmail.com</td>
-                                    <td>Usuario</td>
-                                    <td class="text-center">
-                                        <a href="editar.html" 
-                                        role="button" 
-                                        class="btn btn-success btn-sm" 
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Modificar datos de usuario" 
-                                        data-html="true">
-                                            <i class="fas fa-user-edit"></i>
-                                        </a>
-                                        <a href="#" 
-                                        role="button" 
-                                        class="btn btn-danger btn-sm"  
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Eliminar usuario" data-h
-                                        tml="true">
-                                            <i class="fas fa-user-times"></i>
-                                        </a>
-                                        <a href="#" 
-                                        role="button" 
-                                        class="btn btn-info btn-sm"  
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Enviar mail a usuario" 
-                                        data-html="true">
-                                            <i class="fas fa-envelope text-white"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <?php endforeach;?> 
                             </tbody>
                         </table>
                     </div>

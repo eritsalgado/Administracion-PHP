@@ -1,3 +1,13 @@
+<?php
+    $id = $_GET['id'];
+    include_once("conexion.php");
+    $consulta = $bd->prepare("SELECT * FROM usuarios WHERE id = '$id'");
+		$consulta->execute();
+        $array_resultado = $consulta->fetchAll();
+        // echo "<pre>";
+        // print_r ($array_resultado);
+        // echo "</pre>";   
+?>
 <!DOCrole html>
 <html lang="es">
 <head>
@@ -55,23 +65,24 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-8">
-                            <form>
+                            <form action="update.php" method="POST">
                                 <div class="form-group row">
                                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre completo">
+                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre completo" value="<?=$array_resultado[0]['nombre'];?>">
+                                    <input type="hidden" class="form-control" name="id"  value="<?=$id;?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="<?=$array_resultado[0]['correo'];?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" placeholder="Password" value="<?=$array_resultado[0]['pass'];?>">
                                     </div>
                                 </div>
                                 <fieldset class="form-group">
@@ -79,13 +90,13 @@
                                     <legend class="col-form-label col-sm-2 pt-0">Rango</legend>
                                     <div class="col-sm-10">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="2" <?php echo $array_resultado[0]['rango']==2? "checked":""; ?>>
                                         <label class="form-check-label" for="gridRadios1">
                                             Usuario
                                         </label>
                                         </div>
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="1" <?php echo $array_resultado[0]['rango']==1? "checked":""; ?>>
                                         <label class="form-check-label" for="gridRadios2">
                                             Admin
                                         </label>
@@ -98,7 +109,7 @@
                                             <button class="btn btn-danger full-width">Cancelar</button>
                                     </div>
                                     <div class="col-6">
-                                            <button type="submit" class="btn btn-success full-width">Modificar</button>
+                                            <input type="submit" class="btn btn-success full-width" value="modificar">
                                     </div>
                                 </div>
                             </form>
